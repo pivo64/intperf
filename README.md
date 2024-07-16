@@ -1,10 +1,20 @@
 # Interface Performance Monitor for Cisco Nexus NX-OS Switches >> intperf <<
 
+This Python script is designed to be executed directly on a Cisco NEXUS switch. 
+
 Tested on following Nexus switches
  - 5672UP with NX-OS 7.3(7)
  - C93180YC-EX with NX-OS 9.3(8)
  - C93180YC-FX with NX-OS 10.2(7)
  - C9336C-FX2 with NX-OS 9.3(8)
+
+## Installation
+Copy the file `intperf.py` to the `bootflash:scripts/` directory. Than configure a command alias:
+
+* on Nexus 5000:
+  `cli alias name intperf source intperf.py`
+* on Nexus 9000:
+  `cli alias name intperf python bootflash:scripts/intperf.py`
  
 ## Description
 Shows a live view for in/out-throughput of given single interface, a interface range
