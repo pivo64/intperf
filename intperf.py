@@ -11,21 +11,22 @@ DESCRIPTION='''
 Shows a live view for in/out-throughput of given single interface, a interface range
 or a list of interfaces on terminal.
 Supported Interface Types are:
- - Ethernet: e1/1 eth2/2-4 ...
+ - Ethernet:        e1/1 eth2/2-4 ...
  - Ethernet on Fex: e101/1/1-40 eth104/1/5-10 ...
- - Port-Channels: port-channel1, po2 ...
+ - Port-Channels:   port-channel1, po2, po104 ...
 
 The view refresh automatically (5sec default refresh time).
 '''
 EPILOG = '''
 Examples: 
-  # inperf e1/1 e101/1/25-40 po1 po3
-  # inperf --logfile mylog.csv eth102/1/15-40 po102
+  # intperf e1/1 e101/1/25-40 po1 po3
+  # intperf --logfile mylog.csv eth102/1/15-40 po102
+  # intperf --interval 10 e1/1-48 po1 --logfile
 
 Hint: 
   If the output seems corrupt with unnecessary new-lines, try:
     # terminal length 0
-  before start intperf.
+  before starting intperf.
 
 Version: {} - Date: {}
 '''.format(VERSION, VERSION_DATE)
