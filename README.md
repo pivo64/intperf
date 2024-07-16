@@ -75,3 +75,11 @@ Hint:
   `# terminal lenght 0`
   
   before intperf start.
+
+### Interval
+The terminal refresh interval starts with 5 seconds. If the 'Exec Time' (the time for the 'show interface' command which is uses by this script) exceeds the 5 seconds, the interval increases by 2 seconds. 
+
+The initial interval can be set with the `-i nn` or `--interval nn` optional parameter.
+
+### Logfile
+You can write a optional logfile in '.csv' style with the parameter `-l filename`  or `--logfile filename`. If you put this parameter on last position, you can omit the 'filename'. The logfile name is then `ìntperf.csv` on `bootflash:`.
