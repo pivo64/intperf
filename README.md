@@ -83,3 +83,9 @@ The initial interval can be set with the `-i nn` or `--interval nn` optional par
 
 ### Logfile
 You can write a optional logfile in '.csv' style with the parameter `-l filename`  or `--logfile filename`. If you put this parameter on last position, you can omit the 'filename'. The logfile name is then `ìntperf.csv` on `bootflash:`.
+
+### Screen refresh
+Resizing the screen while the program is running can lead to a corrupted screen (the content is only partially displayed). In this case, press the 'r' button to force a screen refresh.
+
+### Ending the Program
+The program ends when you press the 'q' key. It is possible that the program continues to run for a few seconds, depending on the execution time of the internal CLI command. 
