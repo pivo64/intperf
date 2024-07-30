@@ -4,6 +4,7 @@ This Python script is designed to be executed directly on a Cisco NEXUS switch.
 
 Tested on following Nexus switches
  - 5672UP with NX-OS 7.3(7)
+ - C92348GC-X NX-OS 10.2(7)
  - C93180YC-EX with NX-OS 9.3(8)
  - C93180YC-FX with NX-OS 10.2(7)
  - C9336C-FX2 with NX-OS 9.3(8)
