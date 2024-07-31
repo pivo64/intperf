@@ -25,8 +25,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #
-VERSION = '3.3'
-VERSION_DATE = '15.07.2024'
+VERSION = '3.3b'
+VERSION_DATE = '31.07.2024'
 DESCRIPTION='''
 Shows a live view for in/out-throughput of given single interface, a interface range
 or a list of interfaces on terminal.
@@ -180,7 +180,15 @@ class InterfaceStats:
 
             int_dict['description'] = data.get('desc', '')
             int_dict['state'] = data.get('state', '')
-            int_dict['speed'] = data.get('eth_speed', '')
+            # change 'eth_speed' to 'eth_bw' 31.07.2024
+            #int_dict['speed'] = data.get('eth_speed', '')
+            speed_val = int(data.get('eth_bw', 0))
+            if speed_val >= 1000000:
+                int_dict['speed'] = '{:4d} Gb/s'.format(speed_val // 1000000)
+            elif speed_val >= 1000:
+                int_dict['speed'] = '{:4d} Mb/s'.format(speed_val // 1000)
+            else:
+                int_dict['speed'] = ' - '
 
             # add interface result to interface dict
             self.interfaces[int_name] = int_dict.copy()
