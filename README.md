@@ -79,9 +79,7 @@ The terminal refresh interval starts with 5 seconds. If the 'Exec Time' (the tim
 The initial interval can be set with the `-i nn` or `--interval nn` optional parameter.
 
 ### Error Counter
-With the option '-e' '--error' you will get two additional columns with intput- and output errors of the interfaces. 
-
-
+With the option `-e` or `--error` you will get two additional columns with intput- and output errors of the interfaces. 
 
 ### Logfile
 You can write a optional logfile in '.csv' style with the parameter `-l filename`  or `--logfile filename`. If you put this parameter on last position, you can omit the 'filename'. The logfile name is then `ìntperf.csv` on `bootflash:`.
