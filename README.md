@@ -40,34 +40,30 @@ optional arguments:
 
 Examples:
 ```
-# intperf e1/1-8 e101/1/25-40 po101
-    Int     : Speed and State : Description         : Mbps in    : Mbps out   :
-Eth1/1      : 40 Gb/s    up   : FEX101_FX1          :      184.4 :      343.0 :
-Eth1/2      : 40 Gb/s    up   : FEX101_FX2          :      101.6 :      209.8 :
-Eth1/3      : 40 Gb/s    up   : FEX201_FX1          :      174.6 :      189.1 :
-Eth1/4      : 40 Gb/s    up   : FEX201_FX2          :      178.8 :      308.3 :
-Eth1/5      : 40 Gb/s    up   : FEX301_FX1          :      472.2 :      291.2 :
-Eth1/6      : 40 Gb/s    up   : FEX301_FX2          :      454.8 :      248.9 :
-Eth1/7      : 40 Gb/s    up   : FEX401_FX1          :      161.1 :      146.0 :
-Eth1/8      : 40 Gb/s    up   : FEX401_FX2          :       64.6 :      159.9 :
-Eth101/1/25 : 10 Gb/s    up   : SERVER1_eth1/2      :        3.2 :        3.5 :
-Eth101/1/26 : 10 Gb/s    up   : SERVER1_eth1/1      :       40.1 :       39.8 :
-Eth101/1/27 : 10 Gb/s    up   : SERVER2_eth1/2      :        3.2 :       44.9 :
-Eth101/1/28 : 10 Gb/s    up   : SERVER2_eth1/1      :       15.3 :       32.3 :
-Eth101/1/29 : 10 Gb/s    up   : SERVER3_eth1/2      :        3.2 :       12.0 :
-Eth101/1/30 : 10 Gb/s    up   : SERVER3_eth1/1      :        9.9 :       33.3 :
-Eth101/1/31 : 10 Gb/s    up   : SERVER4_eth1/2      :       30.3 :       27.3 :
-Eth101/1/32 : 10 Gb/s    up   : SERVER4_eth1/1      :       10.3 :       13.2 :
-Eth101/1/33 : 10 Gb/s    up   : SERVER5_eth1/2      :        0.0 :        0.0 :
-Eth101/1/34 : 10 Gb/s    up   : SERVER5_eth1/1      :        0.0 :        0.0 :
-Eth101/1/35 : 10 Gb/s    up   : SERVER6_eth1/2      :        0.0 :        0.0 :
-Eth101/1/36 : 10 Gb/s    up   : SERVER6_eth1/1      :        0.0 :        0.0 :
-Eth101/1/37 : 10 Gb/s    up   : SERVER7_eth1/2      :        0.0 :        0.0 :
-Eth101/1/38 : 10 Gb/s    up   : SERVER7_eth1/1      :        0.0 :        0.0 :
-Eth101/1/39 : 10 Gb/s    up   : SERVER8_eth1/2      :        0.0 :        0.0 :
-Eth101/1/40 : 10 Gb/s    up   : SERVER8_eth1/1      :        0.0 :        0.0 :
-Po101       : 40 Gb/s    up   : FEX101              :      305.2 :      548.0 :
-interval  7s - Last Update: 13:53:39 - Exec Time 3.98 - Press "Q" to end
+# intperf e1/1-8 e101/1/24-34 po1 po101
+BSY Int     : Speed and State : Description         : Mbps in    : Mbps out   :
+Eth1/1      :   40 Gb/s  up   : PFEX101_FX1         :      504.2 :      383.5 :
+Eth1/2      :   40 Gb/s  up   : PFEX101_FX2         :      200.0 :      224.0 :
+Eth1/3      :   40 Gb/s  up   : PFEX201_FX1         :      756.9 :      412.0 :
+Eth1/4      :   40 Gb/s  up   : PFEX201_FX2         :      313.0 :      731.6 :
+Eth1/5      :   40 Gb/s  up   : PFEX301_FX1         :      703.7 :      590.6 :
+Eth1/6      :   40 Gb/s  up   : PFEX301_FX2         :      583.2 :      908.0 :
+Eth1/7      :   40 Gb/s  up   : PFEX401_FX1         :      665.0 :      202.8 :
+Eth1/8      :   40 Gb/s  up   : PFEX401_FX2         :       82.2 :      217.7 :
+Eth101/1/24 :   10 Gb/s  down : MGMT-Outlet         :        0.0 :        0.0 :
+Eth101/1/25 :   10 Gb/s  up   : ASRV101_E8/2        :      109.2 :      121.1 :
+Eth101/1/26 :   10 Gb/s  up   : ASRV101_E2/1        :       19.8 :       22.2 :
+Eth101/1/27 :   10 Gb/s  up   : ASRV102_E8/2        :        3.3 :       65.4 :
+Eth101/1/28 :   10 Gb/s  up   : ASRV102_E2/1        :       11.9 :       19.9 :
+Eth101/1/29 :   10 Gb/s  up   : ASRV103_E8/2        :       71.1 :       56.8 :
+Eth101/1/30 :   10 Gb/s  up   : ASRV103_E2/1        :        8.2 :        7.3 :
+Eth101/1/31 :   10 Gb/s  up   : ASRV104_E8/2        :        3.1 :        3.1 :
+Eth101/1/32 :   10 Gb/s  up   : ASRV104_E2/1        :       34.7 :       43.0 :
+Eth101/1/33 :   10 Gb/s  up   : ASRV105_E8/2        :        5.1 :        4.2 :
+Eth101/1/34 :   10 Gb/s  up   : ASRV105_E2/1        :        7.3 :       42.6 :
+Po1         :  200 Gb/s  up   : SWITA011_Po1         :      637.2 :      559.8 :
+Po101       :   80 Gb/s  up   : PFEX101             :      512.0 :      252.7 :
+interval  5s - Last Update: 13:49:36 - Exec Time 3.47 - Press "Q" to end
 ```
 
 Hint:
@@ -78,9 +74,14 @@ Hint:
   before intperf start.
 
 ### Interval
-The terminal refresh interval starts with 5 seconds. If the 'Exec Time' (the time for the 'show interface' command which is uses by this script) exceeds the 5 seconds, the interval increases by 2 seconds. 
+The terminal refresh interval starts with 5 seconds. If the 'Exec Time' (the time for the 'show interface' command which is uses by this script) exceeds the 5 seconds, the interval increases by 2 seconds.
 
 The initial interval can be set with the `-i nn` or `--interval nn` optional parameter.
+
+### Error Counter
+With the option '-e' '--error' you will get two additional columns with intput- and output errors of the interfaces. 
+
+
 
 ### Logfile
 You can write a optional logfile in '.csv' style with the parameter `-l filename`  or `--logfile filename`. If you put this parameter on last position, you can omit the 'filename'. The logfile name is then `ìntperf.csv` on `bootflash:`.
