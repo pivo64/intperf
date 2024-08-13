@@ -25,8 +25,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #
-VERSION = '3.3b'
-VERSION_DATE = '31.07.2024'
+VERSION = '3.4'
+VERSION_DATE = '13.08.2024'
 DESCRIPTION='''
 Shows a live view for in/out-throughput of given single interface, a interface range
 or a list of interfaces on terminal.
@@ -189,6 +189,10 @@ class InterfaceStats:
                 int_dict['speed'] = '{:4d} Mb/s'.format(speed_val // 1000)
             else:
                 int_dict['speed'] = ' - '
+            
+            # add interface errors
+            int_dict['in_errors'] = int(data.get('eth_inerr'))
+            int_dict['out_errors'] = int(data.get('eth_outerr'))
 
             # add interface result to interface dict
             self.interfaces[int_name] = int_dict.copy()
@@ -202,7 +206,8 @@ def short_if_name(if_name):
     return short_name
 
 #----------------------------
-def mainloop(stdscr, baseif_str, fexif_str, po_str, start_interval, csv_file):
+def mainloop(stdscr, baseif_str, fexif_str, po_str, 
+             start_interval, csv_file, error_counter):
 # Mainloop function
     stat_list = []
     # start interval
@@ -264,14 +269,18 @@ def mainloop(stdscr, baseif_str, fexif_str, po_str, start_interval, csv_file):
         stdscr.addstr(0, 0, '  ')
         stdscr.refresh()
 
-        # print header line
-        stdscr.addstr(
-            0, 0,
-            '{:11} : {:15} : {:20}: {:10} : {:10} :\n'
+        # prepare header line
+        header_line = \
+            '{:11} : {:15} : {:20}: {:10} : {:10} :'\
             .format('    Int', 'Speed and State', 'Description', 
-                    FACTORSTR + ' in', FACTORSTR + ' out'),
-            BOLD
-        )
+                    FACTORSTR + ' in', FACTORSTR + ' out')
+        if error_counter: # add error counter to header
+            header_line += ' {:12} : {:12} :\n'.format('in-errors', 'out-errors')
+        else:
+            header_line += '\n'
+
+        # print header line
+        stdscr.addstr(0, 0, header_line, BOLD)
 
         # if logfile, write header to csv file
         if csv_file and first_loop:
@@ -286,26 +295,34 @@ def mainloop(stdscr, baseif_str, fexif_str, po_str, start_interval, csv_file):
         if csv_file:
             row = []
 
+        # loop through all interfaces lists
         for int_stat in stat_list:
             for intf in int_stat.int_list:
                 # shorten interface output
                 prnt_int_name = short_if_name(intf)
-                # print result lines
+                # prepare output line
+                output_line = '{:11} : {:10} {:4} : {:20}: {:10,.1f} : {:10,.1f} :'\
+                    .format(
+                        prnt_int_name[:11], 
+                        int_stat.interfaces[intf]['speed'][:10],
+                        int_stat.interfaces[intf]['state'][:4], 
+                        int_stat.interfaces[intf]['description'][:20], 
+                        int_stat.interfaces[intf]['in_tput'], 
+                        int_stat.interfaces[intf]['out_tput']
+                    )
+                if error_counter: # add error counter to output line
+                    output_line += ' {:12,.0f} : {:12,.0f} :\n'\
+                    .format(
+                        int_stat.interfaces[intf]['in_errors'],
+                        int_stat.interfaces[intf]['out_errors']
+                    )
+                else:
+                    output_line += '\n'
+                # prepare attribute code - red if interface is down
                 attribute_line = RED_WHITE | BOLD \
                     if int_stat.interfaces[intf]['state'] == 'down' else 0
                 try:
-                    stdscr.addstr(
-                        '{:11} : {:10} {:4} : {:20}: {:10,.1f} : {:10,.1f} :\n'
-                        .format(
-                            prnt_int_name[:11], 
-                            int_stat.interfaces[intf]['speed'][:10],
-                            int_stat.interfaces[intf]['state'][:4], 
-                            int_stat.interfaces[intf]['description'][:20], 
-                            int_stat.interfaces[intf]['in_tput'], 
-                            int_stat.interfaces[intf]['out_tput']
-                        ),
-                        attribute_line
-                    )
+                    stdscr.addstr(output_line, attribute_line)
                 except curses.error:
                     stdscr.clear()
                     stdscr.addstr(
@@ -429,7 +446,8 @@ def main(stdscr, args):
             csv_file = False
         # start mainloop
         valid, err = mainloop(
-            stdscr, baseif_str, fexif_str, po_str, float(args.interval), csv_file
+            stdscr, baseif_str, fexif_str, po_str, 
+            float(args.interval), csv_file, args.error_counter
             )
         if args.logfile:
             f.close()
@@ -455,6 +473,8 @@ if __name__ == '__main__':
     parser.add_argument('if_list', type=str, nargs='+', metavar='Interface or Interface-list')
     parser.add_argument('-i','--interval', type=int, default=5, dest='interval', 
                         choices=range(5, 3600), metavar='5-3600')
+    parser.add_argument('-e', '--error', dest='error_counter', action='store_true',
+                        help='add error counter columns')
     parser.add_argument('-l', '--logfile', metavar='logfile', nargs='?',
                         const='intperf.csv', default=False, dest='logfile')
     args = parser.parse_args()
