@@ -25,8 +25,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #
-VERSION = '3.4'
-VERSION_DATE = '13.08.2024'
+VERSION = '3.4b'
+VERSION_DATE = '19.08.2024'
 DESCRIPTION='''
 Shows a live view for in/out-throughput of given single interface, a interface range
 or a list of interfaces on terminal.
@@ -397,8 +397,8 @@ def main(stdscr, args):
 
     # --- parse input string with interfaces using precompiled REGEX strings ---
     # precompile the rexec strings
-    baseif_re = re.compile('^(e|eth)\d\/\d{1,3}($|-\d{1,3})$', re.IGNORECASE)
-    fexif_re = re.compile('^(e|eth)\d{3}\/\d\/\d{1,3}($|-\d{1,3})$', re.IGNORECASE)
+    baseif_re = re.compile('^(e|eth|ethernet)\d\/\d{1,2}(|\/\d{1,2})($|-\d{1,2})$', re.IGNORECASE)
+    fexif_re = re.compile('^(e|eth|ethernet)\d{3}\/\d\/\d{1,2}($|-\d{1,2})$', re.IGNORECASE)
     po_re = re.compile('^(po|port-channel)\d{1,4}$', re.IGNORECASE)
 
     baseif_list, fexif_list, po_list = [], [], []
